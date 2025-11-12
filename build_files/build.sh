@@ -2,23 +2,45 @@
 
 set -ouex pipefail
 
-### Install packages
+# Install packages
+dnf5 install -y \
+  gtk4-layer-shell \
+  blueman \
+  mate-polkit \
+  niri \
+  ddcutil \
+  git-lfs \
+  ncdu \
+  rclone \
+  solaar \
+  yubikey-manager-qt \
+  adw-gtk3-theme \
+  btop \
+  fprintd-pam \
+  qt5-qtwayland \
+  qt6-qtwayland \
+  rocm-smi \
+  Sunshine \
+  xr-hardware \
+  dbus-x11 \
+  podman-compose
 
-# Packages can be installed from any enabled yum repo on the image.
-# RPMfusion repos are available by default in ublue main images
-# List of rpmfusion packages can be found here:
-# https://mirrors.rpmfusion.org/mirrorlist?path=free/fedora/updates/39/x86_64/repoview/index.html&protocol=https&redirect=1
+# Install and setup DMS
+dnf5 -y copr enable avengemedia/dms
+dnf5 -y install dms dms-greeter
+dnf5 -y copr disable avengemedia/dms
+systemctl enable greetd.service
+systemctl --user enable dms.service
 
-# this installs a package from fedora repos
-dnf5 install -y tmux 
+# Install starship
+dnf5 -y copr enable atim/starship
+dnf5 -y install starship
+dnf5 -y copr disable atim/starship
 
-# Use a COPR Example:
-#
-# dnf5 -y copr enable ublue-os/staging
-# dnf5 -y install package
-# Disable COPRs so they don't end up enabled on the final image:
-# dnf5 -y copr disable ublue-os/staging
+# Install ladspa
+dnf5 -y copr enable ycollet/audinux
+dnf5 -y install ladspa-caps-plugins ladspa-noise-suppression-for-voice
+dnf5 -y copr disable ycollet/audinux
 
-#### Example for enabling a System Unit File
-
-systemctl enable podman.socket
+# Remove Firefox
+dnf5 remove -y firefox firefox-langpacks
