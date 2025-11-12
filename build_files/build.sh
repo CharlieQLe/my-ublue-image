@@ -20,17 +20,22 @@ dnf5 install -y \
   qt5-qtwayland \
   qt6-qtwayland \
   rocm-smi \
-  Sunshine \
   xr-hardware \
   dbus-x11 \
-  podman-compose
+  podman-compose \
+  nautilus
+
+# Install Sunshine
+dnf5 -y copr enable lizardbyte/beta
+dnf5 -y install Sunshine
+dnf5 -y copr disable lizardbyte/beta
 
 # Install and setup DMS
 dnf5 -y copr enable avengemedia/dms
 dnf5 -y install dms dms-greeter
 dnf5 -y copr disable avengemedia/dms
 systemctl enable greetd.service
-systemctl --user enable dms.service
+systemctl --global enable dms.service
 
 # Install starship
 dnf5 -y copr enable atim/starship
@@ -41,6 +46,20 @@ dnf5 -y copr disable atim/starship
 dnf5 -y copr enable ycollet/audinux
 dnf5 -y install ladspa-caps-plugins ladspa-noise-suppression-for-voice
 dnf5 -y copr disable ycollet/audinux
+
+# Install CoolerControl
+dnf5 -y copr enable codifryed/CoolerControl
+dnf5 -y install coolercontrol lm_sensors
+dnf5 -y copr disable codifryed/CoolerControl
+systemctl enable coolercontrold.service
+
+# Install HHD
+dnf5 -y copr enable hhd-dev/hhd
+dnf5 -y install \
+  hhd \
+  hhd-ui
+dnf5 -y copr disable hhd-dev/hhd
+systemctl enable hhd.service
 
 # Remove Firefox
 dnf5 remove -y firefox firefox-langpacks
