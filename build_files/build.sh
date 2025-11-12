@@ -23,7 +23,8 @@ dnf5 install -y \
   xr-hardware \
   dbus-x11 \
   podman-compose \
-  nautilus
+  nautilus \
+  ptyxis
 
 # Install Sunshine
 dnf5 -y copr enable lizardbyte/beta
