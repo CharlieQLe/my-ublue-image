@@ -25,8 +25,11 @@ dnf5 install -y \
   podman-compose \
   nautilus \
   ptyxis \
-  gcr
+  gcr \
+  input-remapper
+
 systemctl --global enable gcr-ssh-agent.socket
+systemctl enable input-remapper.service
 
 # Install Sunshine
 dnf5 -y copr enable lizardbyte/beta
