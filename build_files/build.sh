@@ -62,6 +62,11 @@ dnf5 -y install \
 dnf5 -y copr disable hhd-dev/hhd
 systemctl enable hhd.service
 
+# Install OpenRazer
+curl -Lo /etc/yum.repos.d/hardware:razer.repo https://openrazer.github.io/hardware:razer.repo
+dnf5 -y install openrazer-daemon
+rm -f /etc/yum.repos.d/hardware:razer.repo
+
 # Remove Firefox
 dnf5 remove -y firefox firefox-langpacks
 
