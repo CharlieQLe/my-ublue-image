@@ -64,3 +64,6 @@ systemctl enable hhd.service
 
 # Remove Firefox
 dnf5 remove -y firefox firefox-langpacks
+
+# Enable services
+systemctl --global enable ssh-agent.service
