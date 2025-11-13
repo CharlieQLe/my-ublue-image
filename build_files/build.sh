@@ -24,7 +24,8 @@ dnf5 install -y \
   dbus-x11 \
   podman-compose \
   nautilus \
-  ptyxis
+  ptyxis \
+  gcr
 
 # Install Sunshine
 dnf5 -y copr enable lizardbyte/beta
@@ -67,8 +68,5 @@ curl -Lo /etc/yum.repos.d/hardware:razer.repo https://openrazer.github.io/hardwa
 dnf5 -y install openrazer-daemon
 rm -f /etc/yum.repos.d/hardware:razer.repo
 
-# Remove Firefox
+# Remove packages
 dnf5 remove -y firefox firefox-langpacks
-
-# Enable services
-systemctl --global enable ssh-agent.service
