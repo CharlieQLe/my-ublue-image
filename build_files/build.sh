@@ -26,6 +26,7 @@ dnf5 install -y \
   nautilus \
   ptyxis \
   gcr
+systemctl --global enable gcr-ssh-agent.socket
 
 # Install Sunshine
 dnf5 -y copr enable lizardbyte/beta
