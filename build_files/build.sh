@@ -26,10 +26,16 @@ dnf5 install -y \
   nautilus \
   ptyxis \
   gcr \
-  input-remapper
-
+  input-remapper \
+  rsms-inter-fonts \
+  fira-code-fonts
 systemctl --global enable gcr-ssh-agent.socket
 systemctl enable input-remapper.service
+
+# Install Nerd Fonts
+dnf5 -y copr enable che/nerd-fonts
+dnf5 -y install nerd-fonts
+dnf5 -y copr disable che/nerd-fonts
 
 # Install Sunshine
 dnf5 -y copr enable lizardbyte/beta
