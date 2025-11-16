@@ -6,7 +6,7 @@ set -ouex pipefail
 systemctl disable sddm.service
 
 # Cleanup packages
-dnf5 -y remove kde*
+dnf5 -y remove kde* plasma* breeze*
 
 # Install packages
 dnf5 install -y \
