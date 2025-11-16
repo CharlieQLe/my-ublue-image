@@ -54,5 +54,7 @@ dnf5 -y install openrazer-daemon
 rm -f /etc/yum.repos.d/hardware:razer.repo
 systemctl --global enable openrazer-daemon.service
 
-# Change session select
+# Session handling
 cp /ctx/handheld/files/steamos-session-select /usr/bin/steamos-session-select
+rm -f /usr/share/wayland-sessions/plasma-steamos-wayland-oneshot.desktop
+rm -f /etc/xdg/autostart/steam.desktop
