@@ -35,7 +35,7 @@ dnf5 -y copr enable avengemedia/dms
 dnf5 -y install dms dms-greeter
 dnf5 -y copr disable avengemedia/dms
 systemctl enable greetd.service
-systemctl --global enable dms.service
+systemctl --global add-wants niri.service dms.service
 
 # Install starship
 dnf5 -y copr enable atim/starship
