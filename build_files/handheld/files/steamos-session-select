@@ -1,0 +1,15 @@
+#!/usr/bin/bash
+
+set -e
+
+if [[ $EUID != 0 ]]; then
+  exec pkexec "$(realpath $0)"
+  exit 1
+fi
+
+if pgrep -x "niri" > /dev/null; then
+    pkill gamescope
+else
+    systemctl reset-failed display-manager.service
+    systemctl restart display-manager.service
+fi

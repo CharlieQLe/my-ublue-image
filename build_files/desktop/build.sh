@@ -4,6 +4,7 @@ set -ouex pipefail
 
 # Install packages
 dnf5 install -y \
+  gnome-disk-utility \
   gtk4-layer-shell \
   blueman \
   mate-polkit \
@@ -61,7 +62,7 @@ dnf5 -y copr disable ycollet/audinux
 
 # Install CoolerControl
 dnf5 -y copr enable codifryed/CoolerControl
-dnf5 -y install coolercontrol lm_sensors
+dnf5 -y install coolercontrol coolercontrold lm_sensors
 dnf5 -y copr disable codifryed/CoolerControl
 systemctl enable coolercontrold.service
 
@@ -74,4 +75,6 @@ dnf5 -y copr disable hhd-dev/hhd
 systemctl enable hhd.service
 
 # Remove packages
-dnf5 remove -y firefox firefox-langpacks
+dnf5 remove -y \
+  firefox \
+  firefox-langpacks
