@@ -12,8 +12,10 @@ dnf5 -y remove kde* plasma* breeze*
 dnf5 install -y \
   adw-gtk3-theme \
   blueman \
+  ffmpegthumbnailer \
   gcr \
   git-lfs \
+  glycin-thumbnailer \
   gtk4-layer-shell \
   mate-polkit \
   nautilus \
