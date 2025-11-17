@@ -9,4 +9,6 @@ RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     --mount=type=tmpfs,dst=/tmp \
     /ctx/handheld/build.sh
     
+COPY system_files/common system_files/handheld /
+
 RUN bootc container lint

@@ -23,6 +23,7 @@ dnf5 install -y \
   rclone \
   rsms-inter-fonts \
   solaar \
+  xdg-desktop-portal-gnome \
   xr-hardware \
   yubikey-manager-qt
 
@@ -54,7 +55,11 @@ dnf5 -y install openrazer-daemon
 rm -f /etc/yum.repos.d/hardware:razer.repo
 systemctl --global enable openrazer-daemon.service
 
-# Session handling
-cp /ctx/handheld/files/steamos-session-select /usr/bin/steamos-session-select
-rm -f /usr/share/wayland-sessions/plasma-steamos-wayland-oneshot.desktop
-rm -f /etc/xdg/autostart/steam.desktop
+# Disable Bazzite features
+systemctl disable flatpak-add-fedora-repos.service
+systemctl disable bazzite-autologin.service
+rm -f \
+  /usr/share/wayland-sessions/plasma-steamos-wayland-oneshot.desktop \
+  /usr/share/xsessions/plasma-steamos-oneshot.desktop \
+  /usr/bin/startplasma-steamos-oneshot \
+  /etc/xdg/autostart/steam.desktop
