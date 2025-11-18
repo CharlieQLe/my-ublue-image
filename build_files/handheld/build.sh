@@ -29,6 +29,9 @@ dnf5 install -y \
   xr-hardware \
   yubikey-manager-qt
 
+# Install squeekboard
+dnf5 install -y https://kojipkgs.fedoraproject.org//packages/squeekboard/1.43.1/9.fc43/x86_64/squeekboard-1.43.1-9.fc43.x86_64.rpm
+
 # Enable services
 systemctl --global enable gcr-ssh-agent.socket
 systemctl enable input-remapper.service
