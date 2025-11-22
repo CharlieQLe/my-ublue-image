@@ -6,7 +6,7 @@ set -ouex pipefail
 systemctl disable sddm.service
 
 # Cleanup packages
-dnf5 -y remove kde* plasma* breeze*
+dnf5 -y remove kde* plasma* breeze* fcitx5* kcm-fcitx5 kf5*
 
 # Install packages
 dnf5 install -y \
@@ -16,6 +16,7 @@ dnf5 install -y \
   gcr \
   git-lfs \
   glycin-thumbnailer \
+  gnome-keyring \
   gtk4-layer-shell \
   mate-polkit \
   nautilus \
