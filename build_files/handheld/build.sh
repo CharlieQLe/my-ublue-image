@@ -69,3 +69,6 @@ rm -f \
   /usr/share/xsessions/plasma-steamos-oneshot.desktop \
   /usr/bin/startplasma-steamos-oneshot \
   /etc/xdg/autostart/steam.desktop
+
+# Fix Steam desktop file
+sed -i 's@/usr/bin/bazzite-steam@env LD_PRELOAD=/usr/lib/extest/libextest.so /usr/bin/steam@g' /usr/share/applications/steam.desktop
