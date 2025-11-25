@@ -26,6 +26,7 @@ dnf5 install -y \
   rclone \
   rsms-inter-fonts \
   solaar \
+  udiskie \
   xdg-desktop-portal-gnome \
   xr-hardware \
   yubikey-manager-qt
