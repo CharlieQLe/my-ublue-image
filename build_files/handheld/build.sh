@@ -62,6 +62,9 @@ dnf5 -y install openrazer-daemon
 rm -f /etc/yum.repos.d/hardware:razer.repo
 systemctl --global enable openrazer-daemon.service
 
+# Install LSFG-VK
+dnf5 -y install https://github.com/PancakeTAS/lsfg-vk/releases/download/v1.0.0/lsfg-vk-1.0.0.x86_64.rpm
+
 # Disable Bazzite features
 systemctl disable flatpak-add-fedora-repos.service
 systemctl disable bazzite-autologin.service
