@@ -32,7 +32,7 @@ dnf5 install -y \
 
 # Install niri from copr
 dnf5 -y copr enable yalter/niri
-echo "priority=1" | sudo tee -a /etc/yum.repos.d/_copr:copr.fedorainfracloud.org:yalter:niri.repo
+echo "priority=1" | tee -a /etc/yum.repos.d/_copr:copr.fedorainfracloud.org:yalter:niri.repo
 dnf5 -y install niri
 dnf5 -y copr disable yalter/niri
 
