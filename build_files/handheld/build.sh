@@ -20,7 +20,6 @@ dnf5 install -y \
   gtk4-layer-shell \
   mate-polkit \
   nautilus \
-  niri \
   ncdu \
   podman-compose \
   rclone \
@@ -30,6 +29,12 @@ dnf5 install -y \
   xdg-desktop-portal-gnome \
   xr-hardware \
   yubikey-manager-qt
+
+# Install niri from copr
+dnf5 -y copr enable yalter/niri
+echo "priority=1" | sudo tee -a /etc/yum.repos.d/_copr:copr.fedorainfracloud.org:yalter:niri.repo
+dnf5 -y install niri
+dnf5 -y copr disable yalter/niri
 
 # Install squeekboard
 dnf5 install -y https://kojipkgs.fedoraproject.org//packages/squeekboard/1.43.1/9.fc43/x86_64/squeekboard-1.43.1-9.fc43.x86_64.rpm
