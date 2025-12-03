@@ -8,6 +8,12 @@ systemctl disable sddm.service
 # Cleanup packages
 dnf5 -y remove kde* plasma* breeze* fcitx5* kcm-fcitx5 kf5*
 
+# Install xwayland-satellite from copr
+dnf5 -y copr enable ulysg/xwayland-satellite
+echo "priority=1" | tee -a /etc/yum.repos.d/_copr:copr.fedorainfracloud.org:ulysg:xwayland-satellite.repo
+dnf5 -y install xwayland-satellite
+dnf5 -y copr disable ulysg/xwayland-satellite
+
 # Install packages
 dnf5 install -y \
   adw-gtk3-theme \
