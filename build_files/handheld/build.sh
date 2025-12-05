@@ -30,7 +30,6 @@ dnf5 install -y \
   podman-compose \
   rclone \
   rsms-inter-fonts \
-  solaar \
   udiskie \
   xdg-desktop-portal-gnome \
   xr-hardware \
