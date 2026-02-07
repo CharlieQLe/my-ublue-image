@@ -20,7 +20,6 @@ dnf5 install -y \
   blueman \
   ffmpegthumbnailer \
   gcr \
-  git-lfs \
   glycin-thumbnailer \
   gnome-keyring \
   gtk4-layer-shell \
