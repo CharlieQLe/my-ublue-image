@@ -83,6 +83,14 @@ dnf5 -y install inputplumber
 dnf5 -y copr disable shadowblip/InputPlumber
 systemctl enable inputplumber
 
+# Install packages from terra repo
+dnf5 -y remove steamos-manager
+dnf5 -y install --from-repo=terra \
+    steamos-manager \
+    steamos-manager-gamescope-session-plus \
+    opengamepadui \
+    gamescope-session-opengamepadui
+
 # Disable Bazzite features
 systemctl disable flatpak-add-fedora-repos.service
 systemctl disable bazzite-autologin.service
