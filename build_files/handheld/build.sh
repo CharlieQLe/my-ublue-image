@@ -75,6 +75,15 @@ systemctl --global enable openrazer-daemon.service
 # Install LSFG-VK
 dnf5 -y install https://github.com/PancakeTAS/lsfg-vk/releases/download/v1.0.0/lsfg-vk-1.0.0.x86_64.rpm
 
+# Remove HHD
+dnf5 -y remove hhd hhd-ui
+
+# Install InputPlumber
+dnf5 -y copr enable shadowblip/InputPlumber
+dnf5 -y install inputplumber
+dnf5 -y copr disable shadowblip/InputPlumber
+systemctl enable inputplumber
+
 # Disable Bazzite features
 systemctl disable flatpak-add-fedora-repos.service
 systemctl disable bazzite-autologin.service
