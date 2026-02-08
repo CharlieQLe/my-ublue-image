@@ -85,10 +85,7 @@ systemctl enable inputplumber
 dnf5 -y remove steamos-manager
 dnf5 -y install --from-repo=terra \
     steamos-manager \
-    steamos-manager-gamescope-session-plus \
-    opengamepadui \
-    gamescope-session-opengamepadui \
-    powerstation
+    steamos-manager-gamescope-session-plus
 
 # Disable Bazzite features
 systemctl disable flatpak-add-fedora-repos.service
