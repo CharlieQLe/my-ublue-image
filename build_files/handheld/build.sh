@@ -6,38 +6,36 @@ set -ouex pipefail
 systemctl disable sddm.service
 
 # Cleanup packages
-dnf5 -y remove kde* plasma* breeze* fcitx5* kcm-fcitx5 kf5*
+dnf5 -y remove \
+    *gnome* \
+    *gdm* \
+    --exclude=gnome-disk-utility,gnome-autoar,gnome-desktop4,gnome-desktop3,xdg-desktop-portal-gnome,nautilus,gnome-keyring,gnome-keyring-pam
 
 # Install xwayland-satellite from copr
 dnf5 -y copr enable ulysg/xwayland-satellite
-echo "priority=1" | tee -a /etc/yum.repos.d/_copr:copr.fedorainfracloud.org:ulysg:xwayland-satellite.repo
-dnf5 -y install xwayland-satellite
+dnf5 -y install \
+    --from-repo=copr:copr.fedorainfracloud.org:ulysg:xwayland-satellite \
+    xwayland-satellite
 dnf5 -y copr disable ulysg/xwayland-satellite
 
 # Install packages
 dnf5 install -y \
-  adw-gtk3-theme \
   blueman \
-  ffmpegthumbnailer \
-  gcr \
-  glycin-thumbnailer \
-  gnome-keyring \
   gtk4-layer-shell \
   mate-polkit \
-  nautilus \
   ncdu \
   podman-compose \
   rclone \
   rsms-inter-fonts \
   udiskie \
-  xdg-desktop-portal-gnome \
   xr-hardware \
   yubikey-manager-qt
 
 # Install niri from copr
 dnf5 -y copr enable yalter/niri
-echo "priority=1" | tee -a /etc/yum.repos.d/_copr:copr.fedorainfracloud.org:yalter:niri.repo
-dnf5 -y install niri
+dnf5 -y install \
+    --from-repo=copr:copr.fedorainfracloud.org:yalter:niri \
+    niri
 dnf5 -y copr disable yalter/niri
 
 # Install squeekboard
