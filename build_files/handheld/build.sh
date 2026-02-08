@@ -92,7 +92,9 @@ systemctl disable flatpak-add-fedora-repos.service
 systemctl disable bazzite-autologin.service
 rm -f \
   /usr/share/wayland-sessions/plasma-steamos-wayland-oneshot.desktop \
+  /usr/share/wayland-sessions/gnome-wayland-oneshot.desktop \
   /usr/share/xsessions/plasma-steamos-oneshot.desktop \
+  /usr/share/xsessions/gnome-steamos-oneshot.desktop \
   /usr/bin/startplasma-steamos-oneshot \
   /etc/xdg/autostart/steam.desktop
 
