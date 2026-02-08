@@ -89,7 +89,8 @@ dnf5 -y install --from-repo=terra \
     steamos-manager \
     steamos-manager-gamescope-session-plus \
     opengamepadui \
-    gamescope-session-opengamepadui
+    gamescope-session-opengamepadui \
+    powerstation
 
 # Disable Bazzite features
 systemctl disable flatpak-add-fedora-repos.service
