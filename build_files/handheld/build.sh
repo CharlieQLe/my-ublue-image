@@ -39,16 +39,16 @@ dnf5 -y install \
 dnf5 -y copr disable yalter/niri
 
 # Install squeekboard
-dnf5 install -y https://kojipkgs.fedoraproject.org//packages/squeekboard/1.43.1/9.fc43/x86_64/squeekboard-1.43.1-9.fc43.x86_64.rpm
+dnf5 install -y https://kojipkgs.fedoraproject.org/packages/squeekboard/1.43.1/9.fc43/x86_64/squeekboard-1.43.1-9.fc43.x86_64.rpm
 
 # Enable services
 systemctl --global enable gcr-ssh-agent.socket
 systemctl enable input-remapper.service
 
 # Install and setup DMS
-dnf5 -y copr enable avengemedia/dms
-dnf5 -y install dms dms-greeter
-dnf5 -y copr disable avengemedia/dms
+dnf5 -y copr enable avengemedia/dms-git
+dnf5 -y install quickshell-git dms dms-greeter
+dnf5 -y copr disable avengemedia/dms-git
 systemctl enable greetd.service
 systemctl --global add-wants niri.service dms.service
 
