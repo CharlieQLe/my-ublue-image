@@ -22,7 +22,6 @@ dnf5 -y copr disable ulysg/xwayland-satellite
 dnf5 install -y \
   blueman \
   gtk4-layer-shell \
-  mate-polkit \
   ncdu \
   podman-compose \
   rclone \
