@@ -32,10 +32,13 @@ dnf5 -y install \
     niri
 dnf5 -y copr disable yalter/niri
 
-# Install wvkbd
-dnf5 -y copr enable charlieqle/wvkbd
-dnf5 -y install wvkbd
-dnf5 -y copr disable charlieqle/wvkbd
+# Install my packages
+dnf5 -y copr enable charlieqle/rpmspec
+dnf5 -y install \
+    sysboard \
+    wvkbd-deskintl \
+    wvkbd-mobintl
+dnf5 -y copr disable charlieqle/rpmspec
 
 # Enable services
 systemctl --global enable gcr-ssh-agent.socket
