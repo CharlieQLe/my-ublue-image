@@ -34,7 +34,7 @@ dnf5 -y copr disable yalter/niri
 
 # Install wvkbd
 dnf5 -y copr enable charlieqle/wvkbd
-dnf5 -y install wvkbd
+dnf5 -y install wvkbd-deskintl wvkbd-mobintl
 dnf5 -y copr disable charlieqle/wvkbd
 
 # Enable services
