@@ -8,19 +8,13 @@ systemctl disable sddm.service
 # Cleanup packages
 dnf5 -y remove \
     *gnome* \
-    *gdm* \
+    *sddm* \
     --exclude=gnome-disk-utility,gnome-autoar,gnome-desktop4,gnome-desktop3,xdg-desktop-portal-gnome,nautilus,gnome-keyring,gnome-keyring-pam
-
-# Install xwayland-satellite from copr
-dnf5 -y copr enable ulysg/xwayland-satellite
-dnf5 -y install \
-    --from-repo=copr:copr.fedorainfracloud.org:ulysg:xwayland-satellite \
-    xwayland-satellite
-dnf5 -y copr disable ulysg/xwayland-satellite
 
 # Install packages
 dnf5 install -y \
   blueman \
+  gcr \
   gtk4-layer-shell \
   ncdu \
   podman-compose \
@@ -28,6 +22,7 @@ dnf5 install -y \
   rsms-inter-fonts \
   udiskie \
   xr-hardware \
+  xwayland-satellite \
   yubikey-manager-qt
 
 # Install niri from copr
@@ -37,8 +32,10 @@ dnf5 -y install \
     niri
 dnf5 -y copr disable yalter/niri
 
-# Install squeekboard
-dnf5 install -y https://kojipkgs.fedoraproject.org/packages/squeekboard/1.43.1/9.fc43/x86_64/squeekboard-1.43.1-9.fc43.x86_64.rpm
+# Install wvkbd
+dnf5 -y copr enable charlieqle/wvkbd
+dnf5 -y install wvkbd
+dnf5 -y copr disable charlieqle/wvkbd
 
 # Enable services
 systemctl --global enable gcr-ssh-agent.socket
@@ -69,7 +66,9 @@ rm -f /etc/yum.repos.d/hardware:razer.repo
 systemctl --global enable openrazer-daemon.service
 
 # Install LSFG-VK
-dnf5 -y install https://github.com/PancakeTAS/lsfg-vk/releases/download/v1.0.0/lsfg-vk-1.0.0.x86_64.rpm
+dnf5 -y copr enable jackgreiner/lsfg-vk-git
+dnf5 -y install lsfg-vk lsfg-vk-ui
+dnf5 -y copr disable jackgreiner/lsfg-vk-git
 
 # Remove HHD
 dnf5 -y remove hhd hhd-ui
