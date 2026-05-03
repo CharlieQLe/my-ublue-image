@@ -2,79 +2,100 @@
 
 set -ouex pipefail
 
+# Disable display manager
+systemctl disable gdm.service
+
+# Cleanup packages
+dnf5 -y remove \
+    *gnome* \
+    *gdm* \
+    --exclude=gnome-disk-utility,gnome-autoar,gnome-desktop4,gnome-desktop3,xdg-desktop-portal-gnome,nautilus,gnome-keyring,gnome-keyring-pam
+
 # Install packages
 dnf5 install -y \
-  gnome-disk-utility \
-  gtk4-layer-shell \
   blueman \
-  mate-polkit \
-  niri \
-  ddcutil \
-  git-lfs \
-  ncdu \
-  rclone \
-  solaar \
-  yubikey-manager-qt \
-  adw-gtk3-theme \
-  btop \
-  fprintd-pam \
-  qt5-qtwayland \
-  qt6-qtwayland \
-  rocm-smi \
-  xr-hardware \
-  dbus-x11 \
-  podman-compose \
-  nautilus \
-  ptyxis \
   gcr \
-  input-remapper \
+  gtk4-layer-shell \
+  ncdu \
+  podman-compose \
+  rclone \
   rsms-inter-fonts \
-  fira-code-fonts
+  udiskie \
+  xr-hardware \
+  xwayland-satellite \
+  yubikey-manager-qt
+
+# Install niri from copr
+dnf5 -y copr enable yalter/niri
+dnf5 -y install \
+    --from-repo=copr:copr.fedorainfracloud.org:yalter:niri \
+    niri
+dnf5 -y copr disable yalter/niri
+
+# Install wvkbd
+dnf5 -y copr enable charlieqle/wvkbd
+dnf5 -y install wvkbd
+dnf5 -y copr disable charlieqle/wvkbd
+
+# Enable services
 systemctl --global enable gcr-ssh-agent.socket
 systemctl enable input-remapper.service
 
-# Install Nerd Fonts
-dnf5 -y copr enable che/nerd-fonts
-dnf5 -y install nerd-fonts
-dnf5 -y copr disable che/nerd-fonts
-
-# Install Sunshine
-dnf5 -y copr enable lizardbyte/beta
-dnf5 -y install Sunshine
-dnf5 -y copr disable lizardbyte/beta
-
 # Install and setup DMS
-dnf5 -y copr enable avengemedia/dms
-dnf5 -y install dms dms-greeter
-dnf5 -y copr disable avengemedia/dms
+dnf5 -y copr enable avengemedia/dms-git
+dnf5 -y install quickshell-git dms dms-greeter
+dnf5 -y copr disable avengemedia/dms-git
 systemctl enable greetd.service
-systemctl --global enable dms.service
+systemctl --global add-wants niri.service dms.service
 
 # Install starship
 dnf5 -y copr enable atim/starship
 dnf5 -y install starship
 dnf5 -y copr disable atim/starship
 
-# Install ladspa
-dnf5 -y copr enable ycollet/audinux
-dnf5 -y install ladspa-caps-plugins ladspa-noise-suppression-for-voice
-dnf5 -y copr disable ycollet/audinux
-
 # Install CoolerControl
 dnf5 -y copr enable codifryed/CoolerControl
-dnf5 -y install coolercontrol coolercontrold lm_sensors
+dnf5 -y install coolercontrol coolercontrold
 dnf5 -y copr disable codifryed/CoolerControl
 systemctl enable coolercontrold.service
 
-# Install HHD
-dnf5 -y copr enable hhd-dev/hhd
-dnf5 -y install \
-  hhd \
-  hhd-ui
-dnf5 -y copr disable hhd-dev/hhd
-systemctl enable hhd.service
+# Install OpenRazer
+curl -Lo /etc/yum.repos.d/hardware:razer.repo https://openrazer.github.io/hardware:razer.repo
+dnf5 -y install openrazer-daemon
+rm -f /etc/yum.repos.d/hardware:razer.repo
+systemctl --global enable openrazer-daemon.service
 
-# Remove packages
-dnf5 remove -y \
-  firefox \
-  firefox-langpacks
+# Install LSFG-VK
+dnf5 -y copr enable jackgreiner/lsfg-vk-git
+dnf5 -y install lsfg-vk lsfg-vk-ui
+dnf5 -y copr disable jackgreiner/lsfg-vk-git
+
+# Install InputPlumber
+dnf5 -y copr enable shadowblip/InputPlumber
+dnf5 -y install inputplumber
+dnf5 -y copr disable shadowblip/InputPlumber
+systemctl enable inputplumber
+
+# Install packages from terra repo
+dnf5 -y install --from-repo=terra \
+    steamos-manager \
+    steamos-manager-gamescope-session-plus \
+    steam_notif_daemon \
+    gamescope-session-ogui-steam \
+    gamescope-session-opengamepadui \
+    opengamepadui \
+    gamescope-session-steam
+
+# Disable Bazzite features
+systemctl disable flatpak-add-fedora-repos.service
+rm -f \
+  /usr/share/wayland-sessions/plasma-steamos-wayland-oneshot.desktop \
+  /usr/share/wayland-sessions/gnome-wayland-oneshot.desktop \
+  /usr/share/xsessions/plasma-steamos-oneshot.desktop \
+  /usr/share/xsessions/gnome-steamos-oneshot.desktop \
+  /usr/share/xsessions/gnome-xorg-oneshot.desktop \
+  /usr/bin/startplasma-steamos-oneshot \
+  /etc/xdg/autostart/steam.desktop
+
+# Fix Steam desktop file
+sed -i 's@/usr/bin/bazzite-steam@env LD_PRELOAD=/usr/lib/extest/libextest.so /usr/bin/steam@g' /usr/share/applications/steam.desktop
