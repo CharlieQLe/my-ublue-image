@@ -87,7 +87,8 @@ dnf5 -y install --from-repo=terra \
     gamescope-session-ogui-steam \
     gamescope-session-opengamepadui \
     opengamepadui \
-    gamescope-session-steam
+    gamescope-session-steam \
+    scroll
 
 # Disable Bazzite features
 systemctl disable flatpak-add-fedora-repos.service
