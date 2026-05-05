@@ -15,6 +15,7 @@ dnf5 -y remove \
 dnf5 install -y \
   blueman \
   gcr \
+  git-lfs \
   gtk4-layer-shell \
   ncdu \
   podman-compose \
