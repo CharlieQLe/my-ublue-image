@@ -1,0 +1,14 @@
+#!/bin/bash
+
+if pgrep -x wvkbd-deskintl > /dev/null; then
+    pkill --signal RTMIN wvkbd-deskintl
+    exit 0
+elif pgrep -x wvkbd-mobintl > /dev/null; then
+    pkill --signal RTMIN wvkbd-mobintl
+    exit 0
+elif pgrep -x sysboard > /dev/null; then
+    pkill --signal RTMIN sysboard
+    exit 0
+fi
+
+exit 1
