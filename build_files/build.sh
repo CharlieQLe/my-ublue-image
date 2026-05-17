@@ -36,6 +36,7 @@ dnf5 -y copr disable yalter/niri
 # Install my packages
 dnf5 -y copr enable charlieqle/rpmspec
 dnf5 -y install \
+    low_latency_layer \
     sysboard \
     wvkbd-deskintl \
     wvkbd-mobintl
@@ -91,6 +92,11 @@ dnf5 -y install --from-repo=terra \
     gamescope-session-steam \
     scroll \
     powerbuttond
+
+# Create new Steam BPM desktop session
+sed 's/ -steamdeck"/"/g' /usr/share/gamescope-session-plus/sessions.d/steam > /usr/share/gamescope-session-plus/sessions.d/steam_desktop_bpm
+sed 's/Exec=gamescope-session-plus steam/Exec=gamescope-session-plus steam_desktop_bpm/g' /usr/share/wayland-sessions/gamescope-session-steam.desktop > /usr/share/wayland-sessions/gamescope-session-steam-desktop-bpm.desktop
+sed -i 's/Name=Steam Big Picture/Name=Steam Big Picture (Desktop)/g' /usr/share/wayland-sessions/gamescope-session-steam-desktop-bpm.desktop
 
 # Disable Bazzite features
 systemctl disable flatpak-add-fedora-repos.service
