@@ -92,6 +92,9 @@ dnf5 -y install --from-repo=terra \
     scroll \
     powerbuttond
 
+# Remove steamdeck flag from Gaming Mode
+sed -i 's/ -steamdeck"/"/g' /usr/share/gamescope-session-plus/sessions.d/steam
+
 # Disable Bazzite features
 systemctl disable flatpak-add-fedora-repos.service
 rm -f \
