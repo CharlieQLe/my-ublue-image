@@ -24,18 +24,18 @@ toggle-osk ACTION="":
         exit 0
     elif [ "$OPTION" == "" ]; then
         echo "Choose an option:"
-        OPTION=$(ugum choose "wvkbd-deskintl" "wvkbd-mobintl" "sysboard" "none" "do nothing")
+        OPTION=$(ugum choose "wvkbd (desktop)" "wvkbd (mobile)" "sysboard" "none" "do nothing")
     fi
 
     case "$OPTION" in
-        "wvkbd-deskintl")
+        "wvkbd-deskintl" | "wvkbd (desktop)")
             stop_osk
             echo "Enabling wvkbd's desktop layout as the on-screen keyboard..."
             systemctl --user add-wants niri.service wvkbd-deskintl.service
             systemctl --user start wvkbd-deskintl.service
             echo "On-screen keyboard is now set to wvkbd's desktop layout! Run \`/usr/bin/toggle-osk\` to toggle the on-screen keyboard!"
             ;;
-        "wvkbd-mobintl")
+        "wvkbd-mobintl" | "wvkbd (mobile)")
             stop_osk
             echo "Enabling wvkbd's mobile layout as the on-screen keyboard..."
             systemctl --user add-wants niri.service wvkbd-mobintl.service
@@ -55,3 +55,4 @@ toggle-osk ACTION="":
         *)
             echo "No changes made."
             ;;
+    esac
