@@ -3,14 +3,23 @@ toggle-osk ACTION="":
     OPTION="{{ ACTION }}"
     source /usr/lib/ujust/ujust.sh
 
+    rm_silent() {
+        if [ -f "$1" ]; then
+            echo "Removing \"$1\"..."
+            rm "$1"
+        else
+            echo "Could not find \"$1\"! Continuing..."
+        fi
+    }
+
     stop_osk() {
         echo "Stopping any running on-screen keyboards..."
         systemctl --user stop wvkbd-deskintl.service
         systemctl --user stop wvkbd-mobintl.service
         systemctl --user stop sysboard.service
-        rm $HOME/.config/systemd/user/niri.service.wants/wvkbd-deskintl.service
-        rm $HOME/.config/systemd/user/niri.service.wants/wvkbd-mobintl.service
-        rm $HOME/.config/systemd/user/niri.service.wants/sysboard.service
+        rm_silent "$HOME/.config/systemd/user/niri.service.wants/wvkbd-deskintl.service"
+        rm_silent "$HOME/.config/systemd/user/niri.service.wants/wvkbd-mobintl.service"
+        rm_silent "$HOME/.config/systemd/user/niri.service.wants/sysboard.service"
         echo "Stopped all running on-screen keyboards!"
     }
 
