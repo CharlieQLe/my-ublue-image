@@ -26,6 +26,14 @@ dnf5 install -y \
   xwayland-satellite \
   yubikey-manager-qt
 
+# Install rocm
+dnf5 -y install \
+    rocm \
+    rocm-hip \
+    rocm-runtime \
+    rocm-smi \
+    rocminfo
+
 # Install niri from copr
 dnf5 -y copr enable yalter/niri
 dnf5 -y install \
